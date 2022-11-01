@@ -11,16 +11,18 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <link rel="stylesheet" href="style.css" />
-    <title>Hello</title>
+    <title>Weather project</title>
   </head>
   <body>
     <div class="container">
       <div class="weather-app">
-        <h1>Kyiv</h1>
+        <h1 id="city"></h1>
         <ul class="date">
           <li>Monday 03/10/2022</li>
           <li>9:33am</li>
+          <li id="description"></li>
         </ul>
 
         <div class="row">
@@ -31,7 +33,7 @@
                 alt="Cloudy"
               />
               <div>
-                <strong>9</strong
+                <strong id="temperature"></strong
                 ><span class="units">℃ |<a href="#">℉</a></span>
               </div>
             </div>
@@ -56,6 +58,6 @@
         </small>
       </div>
     </div>
-    <script src="src/app.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
