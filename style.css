@@ -5,7 +5,7 @@ h1 {
     font-size: 30px;
     font-weight: 100;
     line-height: 24px;
-    color: #216B76;
+    color: #60436B;
     margin-bottom: 0;
 }
 ul {
@@ -15,7 +15,7 @@ ul {
 li {
     font-size: 16px;
     list-style: none;
-    color: #298AAE;
+    color: #60436B;
     margin: 0;
     padding: 0;
 
@@ -26,5 +26,19 @@ li {
     padding: 20px;
     border: 1px solid #DADCE0;
     border-radius: 7px;
-    background-color: #DFC2BE;
+    background-color: #FAF3FD;
+}
+.weather-temperature img{
+width: 64px;
+height: 64px;
+margin-right: 10px;
+}
+.weather-temperature strong {
+    font-weight: 400;
+    font-size: 50px;
+}
+.weather-temperature .units{
+    position: relative;
+    top: -26px;
+
 }
