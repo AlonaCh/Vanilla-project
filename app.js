@@ -5,7 +5,7 @@ function formatDate(timestamp) {
   let hours = date.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
-  } 
+  }
   let minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
@@ -35,7 +35,7 @@ function formatDate(timestamp) {
     "Now",
     "Dec",
   ];
-let month = months[date.getMonth()];
+  let month = months[date.getMonth()];
 
   return `${day} ${dateNumber} ${month}, ${hours}:${minutes}`;
 }
@@ -59,10 +59,16 @@ function showTemperature(response) {
 
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
+
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribure("alt", response.data.weather[0].description);
 }
-
+let city = "Morocco";
 let apiKey = "b7a3558dd4231bb7517fc8c9d13c79d4";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Kyiv&appid=${apiKey}&units=metric`;
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-console.log(apiUrl);
 axios.get(apiUrl).then(showTemperature);
