@@ -78,8 +78,20 @@ function handleSubmit(event) {
   event.preventDefault();
   let citySearchElement = document.querySelector("#city-search");
   search(citySearchElement.value);
-
 }
+search("Kyiv");
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+function showFahrenheitTemp(event){
+event.preventDefault();
+let fahrenheitTemp = (10 * 9/5) + 32;
+let temperatureElement = document.querySelector("#temperature");
+temperatureElement.innerHTML =Math.round(fahrenheitTemp);
+
+}
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", showFahrenheitTemp);
+
 
