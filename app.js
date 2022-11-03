@@ -67,8 +67,19 @@ function showTemperature(response) {
   );
   iconElement.setAttribure("alt", response.data.weather[0].description);
 }
-let city = "Morocco";
-let apiKey = "b7a3558dd4231bb7517fc8c9d13c79d4";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+function search(city) {
+ 
+  let apiKey = "b7a3558dd4231bb7517fc8c9d13c79d4";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showTemperature);
+}
 
-axios.get(apiUrl).then(showTemperature);
+function handleSubmit(event) {
+  event.preventDefault();
+  let citySearchElement = document.querySelector("#city-search");
+  search(citySearchElement.value);
+
+}
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
+
