@@ -68,7 +68,6 @@ function showTemperature(response) {
   iconElement.setAttribure("alt", response.data.weather[0].description);
 }
 function search(city) {
- 
   let apiKey = "b7a3558dd4231bb7517fc8c9d13c79d4";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemperature);
@@ -83,15 +82,12 @@ search("Kyiv");
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
-function showFahrenheitTemp(event){
-event.preventDefault();
-let fahrenheitTemp = (10 * 9/5) + 32;
-let temperatureElement = document.querySelector("#temperature");
-temperatureElement.innerHTML =Math.round(fahrenheitTemp);
-
+function showFahrenheitTemp(event) {
+  event.preventDefault();
+  let fahrenheitTemp = (10 * 9) / 5 + 32;
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
 }
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", showFahrenheitTemp);
-
-
