@@ -42,8 +42,8 @@ function formatDate(timestamp) {
 
 function showTemperature(response) {
   console.log(response.data);
-  let tempElement = document.querySelector("#temperature");
-  tempElement.innerHTML = Math.round(response.data.main.temp);
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
 
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name;
@@ -65,7 +65,9 @@ function showTemperature(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-  iconElement.setAttribure("alt", response.data.weather[0].description);
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  celsiusTemperature = response.data.main.temp;
 }
 function search(city) {
   let apiKey = "b7a3558dd4231bb7517fc8c9d13c79d4";
@@ -78,16 +80,28 @@ function handleSubmit(event) {
   let citySearchElement = document.querySelector("#city-search");
   search(citySearchElement.value);
 }
-search("Kyiv");
-let form = document.querySelector("#search-form");
-form.addEventListener("submit", handleSubmit);
 
 function showFahrenheitTemp(event) {
   event.preventDefault();
-  let fahrenheitTemp = (10 * 9) / 5 + 32;
   let temperatureElement = document.querySelector("#temperature");
+  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32;
   temperatureElement.innerHTML = Math.round(fahrenheitTemp);
 }
+function showCelsiusTemp(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", showFahrenheitTemp);
+
+let celsiusLink = document.querySelector("#celsius-link");
+fahrenheitLink.addEventListener("click", showCelsiusTemp);
+
+search("Dakar");

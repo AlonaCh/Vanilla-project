@@ -5,7 +5,7 @@ h1 {
   font-size: 30px;
   font-weight: 100;
   line-height: 24px;
-  color: #60436b;
+  color: #252525;
   margin-bottom: 0;
 }
 ul {
@@ -15,7 +15,7 @@ ul {
 li {
   font-size: 16px;
   list-style: none;
-  color: #60436b;
+  color: #252525;
   margin: 0;
   padding: 0;
   text-transform: capitalize;
@@ -27,9 +27,9 @@ li:first-letter {
   max-width: 600px;
   margin: 30px auto;
   padding: 20px;
-  border: 1px solid #dadce0;
+  border: 1px solid #f5f0e7;
   border-radius: 7px;
-  background-color: #faf3fd;
+  background-color: #f5f0e7;
 }
 .weather-temperature img {
   width: 64px;
