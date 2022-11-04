@@ -44,3 +44,14 @@ li:first-letter {
   position: relative;
   top: -26px;
 }
+.weather-temperature .link {
+ text-decoration: none; 
+}
+.weather-temperature .active {
+  color:#252525;
+  cursor: default;
+  text-decoration: none;
+}
+.weather-temperature .active:hover {
+  text-decoration: none;
+}
