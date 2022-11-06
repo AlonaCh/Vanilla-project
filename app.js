@@ -42,6 +42,7 @@ function formatDate(timestamp) {
 
 function showTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
+  celsiusTemperature = response.data.main.temp;
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 
   let cityElement = document.querySelector("#city");
@@ -66,7 +67,7 @@ function showTemperature(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
-  celsiusTemperature = response.data.main.temp;
+ 
 }
 function search(city) {
   let apiKey = "b7a3558dd4231bb7517fc8c9d13c79d4";
