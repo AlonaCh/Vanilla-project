@@ -39,6 +39,31 @@ function formatDate(timestamp) {
 
   return `${day} ${dateNumber} ${month}, ${hours}:${minutes}`;
 }
+function showForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = "";
+
+  forecastHTML = `
+  
+    <div class="row">
+      <div class="col-2">
+        <div class="weather-forecast-date">Thu</div>
+        <img
+          src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
+          alt=""
+          width="46"
+        />
+        <div class="weather-forecast-temperatures">
+          <span class="weather-forecast-max"> 18° </span>{" "}
+          <span class="weather-forecast-min"> 12° </span>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  forecastElement.innerHTML = forecastHTML;
+}
 
 function showTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
@@ -109,3 +134,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsiusTemp);
 
 search("Dakar");
+showForecast();
