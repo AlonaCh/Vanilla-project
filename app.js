@@ -39,16 +39,19 @@ function formatDate(timestamp) {
 
   return `${day} ${dateNumber} ${month}, ${hours}:${minutes}`;
 }
+
 function showForecast() {
   let forecastElement = document.querySelector("#forecast");
 
-  let forecastHTML = "";
+  let days = ["Wed", "Thu", "Fri", "Sat"];
+  let forecastHTML = `<div class="row">`;
 
-  forecastHTML = `
-  
-    <div class="row">
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
       <div class="col-2">
-        <div class="weather-forecast-date">Thu</div>
+        <div class="weather-forecast-date">${day}</div>
         <img
           src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
           alt=""
@@ -57,11 +60,11 @@ function showForecast() {
         <div class="weather-forecast-temperatures">
           <span class="weather-forecast-max"> 18° </span>{" "}
           <span class="weather-forecast-min"> 12° </span>
-        </div>
-      </div>
     </div>
   </div>`;
+  });
 
+  forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
