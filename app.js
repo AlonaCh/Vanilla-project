@@ -40,7 +40,8 @@ function formatDate(timestamp) {
   return `${day} ${dateNumber} ${month}, ${hours}:${minutes}`;
 }
 
-function showForecast() {
+function showForecast(response) {
+  console.log(response.data);
   let forecastElement = document.querySelector("#forecast");
 
   let days = ["Wed", "Thu", "Fri", "Sat"];
@@ -68,6 +69,15 @@ function showForecast() {
   forecastElement.innerHTML = forecastHTML;
 }
 
+function getForecast(coordinates) {
+  console.log(coordinates);
+let apiKey = "40b745c14eadad7b7c4e6e4bf3b70103";
+let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+console.log(apiUrl);
+axios.get(apiUrl).then(showForecast);
+}
+
+
 function showTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   celsiusTemperature = response.data.main.temp;
@@ -94,6 +104,9 @@ function showTemperature(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+getForecast(response.data.coord);
+
 }
 function search(city) {
   let apiKey = "b7a3558dd4231bb7517fc8c9d13c79d4";
@@ -137,4 +150,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsiusTemp);
 
 search("Dakar");
-showForecast();
+
