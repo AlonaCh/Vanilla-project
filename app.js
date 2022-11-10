@@ -39,49 +39,46 @@ function formatDate(timestamp) {
 
   return `${day} ${dateNumber} ${month}, ${hours}:${minutes}`;
 }
-function formatDay(timestamp){
+function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
-  let days = [
-    "Sun",
-    "Mon",
-    "Tue",
-    "Wen",
-    "Thu",
-    "Fri",
-    "Sat",
-  ];
+  let days = ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"];
 
   return days[day];
 }
 
-
 function showForecast(response) {
   console.log(response.data.daily);
-  let forecast = (response.data.daily);
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
-  
   let forecastHTML = `<div class="row">`;
 
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
-    forecastHTML =
-      forecastHTML +
-      `
+      forecastHTML =
+        forecastHTML +
+        `
       <div class="col-2">
         <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
         
         <img
-          src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
+          src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png"
           alt=""
           width="42"
         />
         <div class="weather-forecast-temperatures">
-          <span class="weather-forecast-max">${Math.round(forecastDay.temp.max)}° </span>
-          <span class="weather-forecast-min">${Math.round(forecastDay.temp.min)}° </span>
+          <span class="weather-forecast-max">${Math.round(
+            forecastDay.temp.max
+          )}° </span>
+          <span class="weather-forecast-min">${Math.round(
+            forecastDay.temp.min
+          )}° </span>
     </div>
-  </div>`; }
+  </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
