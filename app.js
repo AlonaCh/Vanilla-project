@@ -39,30 +39,49 @@ function formatDate(timestamp) {
 
   return `${day} ${dateNumber} ${month}, ${hours}:${minutes}`;
 }
+function formatDay(timestamp){
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wen",
+    "Thu",
+    "Fri",
+    "Sat",
+  ];
+
+  return days[day];
+}
+
 
 function showForecast(response) {
-  console.log(response.data);
+  console.log(response.data.daily);
+  let forecast = (response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
-  let days = ["Wed", "Thu", "Fri", "Sat"];
+  
   let forecastHTML = `<div class="row">`;
 
-  days.forEach(function (day) {
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
     forecastHTML =
       forecastHTML +
       `
       <div class="col-2">
-        <div class="weather-forecast-date">${day}</div>
+        <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        
         <img
-          src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
+          src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
           alt=""
-          width="46"
+          width="42"
         />
         <div class="weather-forecast-temperatures">
-          <span class="weather-forecast-max"> 18° </span>{" "}
-          <span class="weather-forecast-min"> 12° </span>
+          <span class="weather-forecast-max">${Math.round(forecastDay.temp.max)}° </span>
+          <span class="weather-forecast-min">${Math.round(forecastDay.temp.min)}° </span>
     </div>
-  </div>`;
+  </div>`; }
   });
 
   forecastHTML = forecastHTML + `</div>`;
@@ -71,12 +90,11 @@ function showForecast(response) {
 
 function getForecast(coordinates) {
   console.log(coordinates);
-let apiKey = "40b745c14eadad7b7c4e6e4bf3b70103";
-let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-console.log(apiUrl);
-axios.get(apiUrl).then(showForecast);
+  let apiKey = "40b745c14eadad7b7c4e6e4bf3b70103";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(showForecast);
 }
-
 
 function showTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
@@ -105,8 +123,7 @@ function showTemperature(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
-getForecast(response.data.coord);
-
+  getForecast(response.data.coord);
 }
 function search(city) {
   let apiKey = "b7a3558dd4231bb7517fc8c9d13c79d4";
@@ -150,4 +167,3 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsiusTemp);
 
 search("Dakar");
-
