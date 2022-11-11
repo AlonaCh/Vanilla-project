@@ -20,9 +20,11 @@ li {
   padding: 0;
   text-transform: capitalize;
 }
+
 li:first-letter {
   text-transform: capitalize;
 }
+
 .weather-app {
   max-width: 600px;
   margin: 30px auto;
@@ -30,6 +32,7 @@ li:first-letter {
   border: 1px solid #f5f0e7;
   border-radius: 7px;
   background-color: #f5f0e7;
+  background-image: url(https://png.pngtree.com/thumb_back/fh260/back_pic/02/66/97/15578bade17dcc3.jpg);
 }
 .weather-temperature img {
   width: 64px;
@@ -45,10 +48,10 @@ li:first-letter {
   top: -26px;
 }
 .weather-temperature .link {
- text-decoration: none; 
+  text-decoration: none;
 }
 .weather-temperature .active {
-  color:#252525;
+  color: #252525;
   cursor: default;
   text-decoration: none;
 }
@@ -63,7 +66,6 @@ li:first-letter {
   font-size: 15px;
   color: #252525;
   opacity: 0.6;
-  
 }
 .weather-forecast-temperatures {
   font-size: 13px;

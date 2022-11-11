@@ -42,7 +42,7 @@ function formatDate(timestamp) {
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
-  let days = ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"];
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return days[day];
 }
@@ -60,21 +60,21 @@ function showForecast(response) {
         forecastHTML +
         `
       <div class="col-2">
-        <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        <div class="weather-forecast-date">${formatDay(forecastDay.time)}</div>
         
         <img
-          src="http://openweathermap.org/img/wn/${
-            forecastDay.weather[0].icon
-          }@2x.png"
+          src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+            forecastDay.condition.icon
+          }.png" 
           alt=""
           width="42"
         />
         <div class="weather-forecast-temperatures">
           <span class="weather-forecast-max">${Math.round(
-            forecastDay.temp.max
+            forecastDay.temperature.maximum
           )}° </span>
           <span class="weather-forecast-min">${Math.round(
-            forecastDay.temp.min
+            forecastDay.temperature.minimum
           )}° </span>
     </div>
   </div>`;
@@ -87,44 +87,48 @@ function showForecast(response) {
 
 function getForecast(coordinates) {
   console.log(coordinates);
-  let apiKey = "40b745c14eadad7b7c4e6e4bf3b70103";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  let apiKey = "7878d011dt257f603164ea9dcabco754";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
   console.log(apiUrl);
   axios.get(apiUrl).then(showForecast);
 }
 
 function showTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
-  celsiusTemperature = response.data.main.temp;
+  celsiusTemperature = response.data.temperature.current;
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 
   let cityElement = document.querySelector("#city");
-  cityElement.innerHTML = response.data.name;
+  cityElement.innerHTML = response.data.city;
 
   let descriptionElement = document.querySelector("#description");
-  descriptionElement.innerHTML = response.data.weather[0].description;
+  descriptionElement.innerHTML = response.data.condition.description;
 
+ let feelLikeElement = document.querySelector("#feels-like");
+ feelLikeElement.innerHTML = Math.round(response.data.temperature.feels_like);
+  
   let humidityElement = document.querySelector("#humidity");
-  humidityElement.innerHTML = response.data.main.humidity;
+  humidityElement.innerHTML = response.data.temperature.humidity;
 
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
 
   let dateElement = document.querySelector("#date");
-  dateElement.innerHTML = formatDate(response.data.dt * 1000);
+  dateElement.innerHTML = formatDate(response.data.time * 1000);
 
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
-  iconElement.setAttribute("alt", response.data.weather[0].description);
+  iconElement.setAttribute("alt", response.data.condition.description);
 
-  getForecast(response.data.coord);
+  getForecast(response.data.coordinates);
 }
 function search(city) {
-  let apiKey = "b7a3558dd4231bb7517fc8c9d13c79d4";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiKey = "7878d011dt257f603164ea9dcabco754";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  console.log(apiUrl);
   axios.get(apiUrl).then(showTemperature);
 }
 
