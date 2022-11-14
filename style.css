@@ -27,7 +27,9 @@ li:first-letter {
 .weather-app-wrapper {
   max-width: 600px;
   margin: 30px auto;
+  box-shadow: 8px 8px 4px lightblue;
 }
+
 .weather-app {
   padding: 20px;
   border: 1px solid #f5f0e7;
@@ -40,8 +42,8 @@ li:first-letter {
   );
 }
 .weather-temperature img {
-  width: 64px;
-  height: 64px;
+  width: 74px;
+  height: 74px;
   margin-right: 10px;
 }
 .weather-temperature strong {
